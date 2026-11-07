@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2026 Koffi Modeste Junior
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
+    Column names are an assumption, not an official Wave format: check them
+    against a real export and edit the mapping (noupdate keeps your changes).
+-->
+<odoo noupdate="1">
+    <record id="mapping_wave_csv" model="account.statement.import.sheet.mapping">
+        <field name="name">Wave (CSV)</field>
+        <field name="file_encoding">utf-8-sig</field>
+        <field name="delimiter">comma</field>
+        <field name="quotechar">"</field>
+        <field name="header_lines_skip_count">0</field>
+        <field name="footer_lines_skip_count">0</field>
+        <field name="float_thousands_sep">none</field>
+        <field name="float_decimal_sep">dot</field>
+        <field name="timestamp_format">%Y-%m-%d %H:%M:%S</field>
+        <field name="timestamp_column">Date</field>
+        <field name="amount_type">simple_value</field>
+        <!-- Net amount = what actually moves on the wallet, so the balance matches. -->
+        <field name="amount_column">Montant net</field>
+        <field name="transaction_id_column">Identifiant</field>
+        <field name="description_column">Description</field>
+        <field name="partner_name_column">Contrepartie</field>
+        <field name="notes_column">Frais</field>
+    </record>
+</odoo>

@@ -1,0 +1,32 @@
+name: tests
+
+on:
+  push:
+    branches: [main, "*.0"]
+  pull_request:
+
+jobs:
+  odoo-install:
+    # Install the module and run its tests on Odoo 19 Community with its OCA dependencies.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch OCA dependencies
+        run: |
+          git clone --depth 1 -b 19.0 https://github.com/OCA/bank-statement-import.git oca/bank-statement-import
+          git clone --depth 1 -b 19.0 https://github.com/OCA/account-reconcile.git oca/account-reconcile
+      - name: Install and test on odoo:19 + postgres:16
+        run: |
+          docker network create odoo
+          docker run -d --name db --network odoo \
+            -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres postgres:16
+          until docker exec db pg_isready -U odoo; do sleep 1; done
+          # The image entrypoint reads the database settings from HOST/USER/PASSWORD.
+          docker run --rm --network odoo -e HOST=db -e USER=odoo -e PASSWORD=odoo \
+            -v "$PWD/account_statement_import_wave:/mnt/extra-addons/account_statement_import_wave:ro" \
+            -v "$PWD/oca/bank-statement-import:/mnt/bsi:ro" \
+            -v "$PWD/oca/account-reconcile:/mnt/ar:ro" odoo:19 \
+            odoo -d test --addons-path=/mnt/extra-addons,/mnt/bsi,/mnt/ar,/usr/lib/python3/dist-packages/odoo/addons \
+            -i account_statement_import_wave --test-enable --test-tags=/account_statement_import_wave \
+            --stop-after-init 2>&1 | tee odoo.log
+          grep -E "0 failed, 0 error\(s\) of [1-9][0-9]* tests" odoo.log

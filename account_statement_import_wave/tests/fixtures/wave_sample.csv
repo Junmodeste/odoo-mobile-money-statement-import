@@ -1,0 +1,4 @@
+Date,Identifiant,Description,Contrepartie,Montant brut,Frais,Montant net
+2026-11-02 09:15:00,T_DEMO_0001,Paiement reçu,Client Fictif A,50000,500,49500
+2026-11-02 14:40:00,T_DEMO_0002,Paiement reçu,Client Fictif B,12000,120,11880
+2026-11-03 10:05:00,T_DEMO_0003,Transfert envoyé,Fournisseur Fictif C,-20000,0,-20000
