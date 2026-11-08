@@ -45,7 +45,7 @@ Si votre export diffère, modifiez le modèle **Wave (CSV)** dans Odoo : vos cha
 
 ### Version supportée
 
-Odoo 19, branche [`19.0`](https://github.com/Junmodeste/odoo-mobile-money-statement-import/tree/19.0). Tests automatisés (GitHub Actions) sur Odoo 19 Community (image `odoo:19`) + PostgreSQL 16, avec les dépendances OCA, à chaque push.
+Odoo 19, branche [`19.0`](https://github.com/Junmodeste/odoo-mobile-money-statement-import/tree/19.0). Tests automatisés (GitHub Actions) sur Odoo 19 Community (image `odoo:19`) + PostgreSQL 16, avec les dépendances OCA, à chaque push. Autre branche : [`18.0`](https://github.com/Junmodeste/odoo-mobile-money-statement-import/tree/18.0) (Odoo 18).
 
 ### Licence
 
@@ -85,7 +85,7 @@ If your export differs, edit the **Wave (CSV)** mapping in Odoo: your changes ar
 
 ### Supported version
 
-Odoo 19, branch [`19.0`](https://github.com/Junmodeste/odoo-mobile-money-statement-import/tree/19.0). Automated tests (GitHub Actions) on Odoo 19 Community (`odoo:19` image) + PostgreSQL 16, with the OCA dependencies, on every push.
+Odoo 19, branch [`19.0`](https://github.com/Junmodeste/odoo-mobile-money-statement-import/tree/19.0). Automated tests (GitHub Actions) on Odoo 19 Community (`odoo:19` image) + PostgreSQL 16, with the OCA dependencies, on every push. Other branch: [`18.0`](https://github.com/Junmodeste/odoo-mobile-money-statement-import/tree/18.0) (Odoo 18).
 
 ### License
 
