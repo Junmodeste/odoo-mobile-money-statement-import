@@ -1,6 +1,6 @@
 # Odoo Mobile Money Statement Import (Wave)
 
-[![Odoo 19](https://img.shields.io/badge/Odoo-19.0-714B67)](https://www.odoo.com)
+[![Odoo 18](https://img.shields.io/badge/Odoo-18.0-714B67)](https://www.odoo.com)
 [![tests](https://github.com/Junmodeste/odoo-mobile-money-statement-import/actions/workflows/tests.yml/badge.svg)](https://github.com/Junmodeste/odoo-mobile-money-statement-import/actions/workflows/tests.yml)
 [![License: AGPL-3](https://img.shields.io/badge/License-AGPL--3-blue.svg)](LICENSE)
 
@@ -34,8 +34,8 @@ Si votre export diffère, modifiez le modèle **Wave (CSV)** dans Odoo : vos cha
 
 ### Prérequis
 
-- Odoo 19 (Community ou Enterprise), module `account`
-- Modules OCA [`account_statement_import_sheet_file`](https://github.com/OCA/bank-statement-import/tree/19.0) (dépôt `OCA/bank-statement-import`) et `account_statement_base` (dépôt [`OCA/account-reconcile`](https://github.com/OCA/account-reconcile/tree/19.0)), branche `19.0`
+- Odoo 18 (Community ou Enterprise), module `account`
+- Modules OCA [`account_statement_import_sheet_file`](https://github.com/OCA/bank-statement-import/tree/18.0) (dépôt `OCA/bank-statement-import`) et `account_statement_base` (dépôt [`OCA/account-reconcile`](https://github.com/OCA/account-reconcile/tree/18.0)), branche `18.0`
 
 ### Installation
 
@@ -45,7 +45,7 @@ Si votre export diffère, modifiez le modèle **Wave (CSV)** dans Odoo : vos cha
 
 ### Version supportée
 
-Odoo 19, branche [`19.0`](https://github.com/Junmodeste/odoo-mobile-money-statement-import/tree/19.0). Tests automatisés (GitHub Actions) sur Odoo 19 Community (image `odoo:19`) + PostgreSQL 16, avec les dépendances OCA, à chaque push.
+Odoo 18, branche [`18.0`](https://github.com/Junmodeste/odoo-mobile-money-statement-import/tree/18.0). Tests automatisés (GitHub Actions) sur Odoo 18 Community (image `odoo:18`) + PostgreSQL 16, avec les dépendances OCA, à chaque push. Autre branche : [`19.0`](https://github.com/Junmodeste/odoo-mobile-money-statement-import/tree/19.0) (Odoo 19).
 
 ### Licence
 
@@ -74,8 +74,8 @@ If your export differs, edit the **Wave (CSV)** mapping in Odoo: your changes ar
 
 ### Requirements
 
-- Odoo 19 (Community or Enterprise), `account` module
-- OCA modules `account_statement_import_sheet_file` (`OCA/bank-statement-import`) and `account_statement_base` (`OCA/account-reconcile`), branch `19.0`
+- Odoo 18 (Community or Enterprise), `account` module
+- OCA modules `account_statement_import_sheet_file` (`OCA/bank-statement-import`) and `account_statement_base` (`OCA/account-reconcile`), branch `18.0`
 
 ### Installation
 
@@ -85,7 +85,7 @@ If your export differs, edit the **Wave (CSV)** mapping in Odoo: your changes ar
 
 ### Supported version
 
-Odoo 19, branch [`19.0`](https://github.com/Junmodeste/odoo-mobile-money-statement-import/tree/19.0). Automated tests (GitHub Actions) on Odoo 19 Community (`odoo:19` image) + PostgreSQL 16, with the OCA dependencies, on every push.
+Odoo 18, branch [`18.0`](https://github.com/Junmodeste/odoo-mobile-money-statement-import/tree/18.0). Automated tests (GitHub Actions) on Odoo 18 Community (`odoo:18` image) + PostgreSQL 16, with the OCA dependencies, on every push. Other branch: [`19.0`](https://github.com/Junmodeste/odoo-mobile-money-statement-import/tree/19.0) (Odoo 19).
 
 ### License
 
