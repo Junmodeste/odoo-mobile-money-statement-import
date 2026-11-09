@@ -3,7 +3,7 @@
 {
     "name": "Wave Mobile Money Statement Import",
     "summary": "Ready-made CSV mapping to import Wave mobile money statements",
-    "version": "18.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Accounting",
     "website": "https://github.com/Junmodeste/odoo-mobile-money-statement-import",
     "author": "Koffi Modeste Junior",
