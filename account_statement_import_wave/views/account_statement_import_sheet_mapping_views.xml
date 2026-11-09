@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2026 Koffi Modeste Junior
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <!-- OCA names its form view "..._tree" (and its list view "..._form"). -->
+    <record id="account_statement_import_sheet_mapping_form" model="ir.ui.view">
+        <field name="model">account.statement.import.sheet.mapping</field>
+        <field
+            name="inherit_id"
+            ref="account_statement_import_sheet_file.account_statement_import_sheet_mapping_tree"
+        />
+        <field name="arch" type="xml">
+            <field name="notes_column" position="after">
+                <field name="fee_column" />
+            </field>
+        </field>
+    </record>
+</odoo>
