@@ -16,6 +16,7 @@ Il s'appuie sur le module OCA `account_statement_import_sheet_file` : les lignes
 - Un modèle d'import **Wave (CSV)** est créé dans *Comptabilité > Configuration > Statement Sheet Mappings* (libellé du module OCA, selon votre traduction).
 - Le montant importé est le **montant net** (après frais Wave) : c'est ce qui bouge réellement sur le compte, donc le solde du relevé correspond au solde Wave.
 - Les frais sont repris dans les notes de la ligne. L'identifiant de transaction Wave rend chaque ligne unique : réimporter le même fichier ne crée pas de doublon.
+- Variante **Wave (CSV, separate fees)** : chaque ligne avec frais devient deux lignes, le **montant brut** (net + frais) et une ligne **« Frais : … »** négative, à rapprocher avec un compte de charges (frais bancaires). Le total et le solde du relevé restent identiques. Pour un autre modèle d'import, renseignez le champ **Colonne des frais** (en 18.0, le modèle doit aussi avoir une colonne d'identifiant de transaction).
 
 ### Colonnes attendues (à vérifier)
 
@@ -65,6 +66,7 @@ It builds on the OCA module `account_statement_import_sheet_file`: imported line
 - A **Wave (CSV)** import mapping is created in *Accounting > Configuration > Statement Sheet Mappings*.
 - The imported amount is the **net amount** (after Wave fees): it is what actually moves on the wallet, so the statement balance matches the Wave balance.
 - Fees are kept in the line notes. The Wave transaction id makes each line unique: importing the same file again creates no duplicate.
+- **Wave (CSV, separate fees)** variant: each line with fees becomes two lines, the **gross amount** (net + fees) and a negative **"Fees: …"** line, to reconcile with an expense account (bank charges). The statement total and balance stay the same. For another import mapping, fill in the **Fee Column** field (in 18.0, the mapping also needs a transaction ID column).
 
 ### Expected columns (to be checked)
 

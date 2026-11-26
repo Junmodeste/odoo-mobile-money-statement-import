@@ -25,8 +25,9 @@ class TestWaveImport(common.TransactionCase):
         )
         cls.mapping = cls.env.ref("account_statement_import_wave.mapping_wave_csv")
 
-    def _import(self, filename):
+    def _import(self, filename, mapping=None):
         data = (Path(__file__).parent / "fixtures" / filename).read_bytes()
+        mapping = mapping or self.mapping
         wizard = (
             self.env["account.statement.import"]
             .with_context(
@@ -37,7 +38,7 @@ class TestWaveImport(common.TransactionCase):
                 {
                     "statement_filename": filename,
                     "statement_file": b64encode(data),
-                    "sheet_mapping_id": self.mapping.id,
+                    "sheet_mapping_id": mapping.id,
                 }
             )
         )
@@ -72,3 +73,42 @@ class TestWaveImport(common.TransactionCase):
             [("journal_id", "=", self.journal.id)]
         )
         self.assertEqual(len(statements.line_ids), 3)
+
+    def test_import_separate_fees(self):
+        mapping = self.env.ref(
+            "account_statement_import_wave.mapping_wave_csv_separate_fees"
+        )
+        statement = self._import("wave_sample.csv", mapping)
+        lines = statement.line_ids
+        # Two lines with fees -> gross + fee line each; no fee line when fees = 0.
+        self.assertEqual(len(lines), 5)
+        self.assertEqual(
+            sorted(lines.mapped("amount")), [-20000, -500, -120, 12000, 50000]
+        )
+        # Same total as the net import: the wallet balance still matches.
+        self.assertEqual(sum(lines.mapped("amount")), 41380)
+        fee = lines.filtered(lambda line: line.amount == -500)
+        self.assertIn("Paiement reçu", fee.payment_ref)
+        self.assertFalse(fee.partner_name)
+        self.assertTrue(fee.unique_import_id.endswith("-fee"))
+        self.assertIn("T_DEMO_0001", fee.unique_import_id)
+
+    def test_reimport_separate_fees_no_duplicate(self):
+        mapping = self.env.ref(
+            "account_statement_import_wave.mapping_wave_csv_separate_fees"
+        )
+        self._import("wave_sample.csv", mapping)
+        with suppress(UserError):
+            self._import("wave_sample.csv", mapping)
+        statements = self.env["account.bank.statement"].search(
+            [("journal_id", "=", self.journal.id)]
+        )
+        self.assertEqual(len(statements.line_ids), 5)
+
+    def test_separate_fees_requires_transaction_id(self):
+        # In 18.0 fees are matched to lines by transaction ID.
+        mapping = self.env.ref(
+            "account_statement_import_wave.mapping_wave_csv_separate_fees"
+        ).copy({"transaction_id_column": False})
+        with self.assertRaisesRegex(UserError, "transaction ID column"):
+            self._import("wave_sample.csv", mapping)
