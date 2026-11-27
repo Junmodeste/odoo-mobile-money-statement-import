@@ -25,7 +25,7 @@ class TestWaveImport(common.TransactionCase):
         )
         cls.mapping = cls.env.ref("account_statement_import_wave.mapping_wave_csv")
 
-    def _import(self, filename, mapping=None):
+    def _import(self, filename, mapping=None, **context):
         data = (Path(__file__).parent / "fixtures" / filename).read_bytes()
         mapping = mapping or self.mapping
         wizard = (
@@ -33,6 +33,7 @@ class TestWaveImport(common.TransactionCase):
             .with_context(
                 journal_id=self.journal.id,
                 account_statement_import_sheet_file_test=True,
+                **context,
             )
             .create(
                 {
@@ -104,3 +105,34 @@ class TestWaveImport(common.TransactionCase):
             [("journal_id", "=", self.journal.id)]
         )
         self.assertEqual(len(statements.line_ids), 5)
+
+    def _load_french(self):
+        self.env["res.lang"]._activate_lang("fr_FR")
+        self.env["ir.module.module"]._load_module_terms(
+            ["account_statement_import_wave"], ["fr_FR"]
+        )
+
+    def test_french_field_labels(self):
+        # Every field added by the module must have its label in i18n/fr.po.
+        self._load_french()
+        self.env.cr.execute(
+            """
+            SELECT f.model || '.' || f.name
+              FROM ir_model_fields f
+              JOIN ir_model_data d ON d.model = 'ir.model.fields' AND d.res_id = f.id
+             WHERE d.module = 'account_statement_import_wave'
+               AND f.field_description->>'fr_FR' IS NULL
+            """
+        )
+        self.assertEqual([row[0] for row in self.env.cr.fetchall()], [])
+
+    def test_french_fee_line_label(self):
+        # The fee line label comes from the code (self.env._): it follows the
+        # language of the user who imports the file.
+        self._load_french()
+        mapping = self.env.ref(
+            "account_statement_import_wave.mapping_wave_csv_separate_fees"
+        )
+        statement = self._import("wave_sample.csv", mapping, lang="fr_FR")
+        fee = statement.line_ids.filtered(lambda line: line.amount == -500)
+        self.assertTrue(fee.payment_ref.startswith("Frais : "), fee.payment_ref)

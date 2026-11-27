@@ -17,6 +17,16 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: account_statement_import_wave
+#: model:ir.model,name:account_statement_import_wave.model_account_statement_import_sheet_mapping
+msgid "Bank Statement Import Sheet Mapping"
+msgstr "Correspondance de feuille pour l'import de relevés bancaires"
+
+#. module: account_statement_import_wave
+#: model:ir.model,name:account_statement_import_wave.model_account_statement_import_sheet_parser
+msgid "Bank Statement Import Sheet Parser"
+msgstr "Analyseur de feuille pour l'import de relevés bancaires"
+
+#. module: account_statement_import_wave
 #: model:ir.model.fields,help:account_statement_import_wave.field_account_statement_import_sheet_mapping__fee_column
 msgid ""
 "Column holding the fees already deducted from the amount column. When set, "
@@ -30,6 +40,12 @@ msgstr ""
 "rapprocher les frais avec un compte de charges dédié."
 
 #. module: account_statement_import_wave
+#: model:ir.model.fields,field_description:account_statement_import_wave.field_account_statement_import_sheet_mapping__display_name
+#: model:ir.model.fields,field_description:account_statement_import_wave.field_account_statement_import_sheet_parser__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: account_statement_import_wave
 #: model:ir.model.fields,field_description:account_statement_import_wave.field_account_statement_import_sheet_mapping__fee_column
 msgid "Fee Column"
 msgstr "Colonne des frais"
@@ -39,3 +55,9 @@ msgstr "Colonne des frais"
 #: code:addons/account_statement_import_wave/wizard/account_statement_import_sheet_parser.py:0
 msgid "Fees: %s"
 msgstr "Frais : %s"
+
+#. module: account_statement_import_wave
+#: model:ir.model.fields,field_description:account_statement_import_wave.field_account_statement_import_sheet_mapping__id
+#: model:ir.model.fields,field_description:account_statement_import_wave.field_account_statement_import_sheet_parser__id
+msgid "ID"
+msgstr "ID"
